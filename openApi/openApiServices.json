@@ -1,0 +1,287 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "API Servicio Inteligente de recommendation de comidas",
+        "version": "1.0"
+    },
+    "host": "virtserver.swaggerhub.com",
+    "schemes": ["http"],
+    "paths": {
+        "/recommendation/artificial/maindishes/{value}": {
+            "get": {
+                "summary": "Obtener recomendación artificial para plato principal",
+                "parameters": [
+                    {
+                        "name": "value",
+                        "in": "path",
+                        "description": "value para la recomendación (por ejemplo: 'picante', 'dulce', etc.)",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta Exitosa",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                        }  
+                    },
+
+                    "404": {
+                        "description": "No ofrecemos recomendaciones para ese platillo"
+                    }
+
+                }
+            }
+        },
+        "/recommendation/artificial/drinks/{value}": {
+            "get": {
+                "summary": "Obtener recomendación artificial para drinks",
+                "parameters": [
+                    {
+                        "name": "value",
+                        "in": "path",
+                        "description": "value para la recomendación (por ejemplo: 'Agua', 'Te', etc.)",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta Exitosa",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                        }  
+                    },
+
+                    "404": {
+                        "description": "No ofrecemos recomendaciones para esa drinks"  
+                    }
+                }
+            }
+        },
+        "/recommendation/artificial/desserts/{value}": {
+            "get": {
+                "summary": "Obtener recomendación artificial para postre",
+                "parameters": [
+                    {
+                        "name": "value",
+                        "in": "path",
+                        "description": "value para la recomendación (por ejemplo: 'helado', 'galletas', etc.)",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta Exitosa",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                        }  
+                    },
+
+                    "404": {
+                        "description": "No ofrecemos recomendaciones para ese postre"   
+                    }
+                }
+            }
+        },
+        "/recommendation/default/maindishes/{value}": {
+            "get": {
+                "summary": "Obtener recomendación predeterminada para plato principal",
+                "parameters": [
+                    {
+                        "name": "value",
+                        "in": "path",
+                        "description": "value para la recomendación (por ejemplo: 'picante', 'dulce', etc.)",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta Exitosa",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                        }  
+                    },
+
+                    "404": {
+                        "description": "No ofrecemos recomendaciones para ese platillo" 
+                    }
+                    
+                }
+            }
+        },
+        "/recommendation/default/drinks/{value}": {
+            "get": {
+                "summary": "Obtener recomendación predeterminada para bebidas",
+                "parameters": [
+                    {
+                        "name": "value",
+                        "in": "path",
+                        "description": "Valor para la recomendación (por ejemplo: 'Agua', 'Te', etc.)",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta Exitosa",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                        }   
+                    },
+
+                    "404": {
+                        "description": "No ofrecemos recomendaciones para ese bebidas"
+                    }
+                }
+            }
+            
+        },
+        "/recommendation/default/desserts/{value}": {
+            "get": {
+                "summary": "Obtener recomendación predeterminada para postre",
+                "parameters": [
+                    {
+                        "name": "value",
+                        "in": "path",
+                        "description": "Valor para la recomendación (por ejemplo: 'helado', 'galletas', etc.)",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta Exitosa",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                        }
+                    },
+
+                    "404": {
+                        "description": "No ofrecemos recomendaciones para ese postre"
+                    }
+                }
+            }
+        },
+        "/recommendation/externalSystem/maindishes/{value}": {
+            "get": {
+                "summary": "Obtener recomendación de un companero para plato principal",
+                "parameters": [
+                    {
+                        "name": "value",
+                        "in": "path",
+                        "description": "value para la recomendación (por ejemplo: 'picante', 'dulce', etc.)",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta Exitosa",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                        }
+                            
+                    },
+
+                    "404": {
+                        "description": "No ofrecemos recomendaciones para ese platillo"
+                    }
+                    
+                }
+            }
+        },
+        "/recommendation/externalSystem/drinks/{value}": {
+            "get": {
+                "summary": "Obtener recomendación de un companero para bebida",
+                "parameters": [
+                    {
+                        "name": "value",
+                        "in": "path",
+                        "description": "value para la recomendación (por ejemplo: 'Agua', 'Te', etc.)",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta Exitosa",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                        }
+                    },
+
+                    "404": {
+                        "description": "No ofrecemos recomendaciones para esa bebida"
+                    }
+                }
+            }
+        },
+        "/recommendation/externalSystem/desserts/{value}": {
+            "get": {
+                "summary": "Obtener recomendación de un companero para postre",
+                "parameters": [
+                    {
+                        "name": "value",
+                        "in": "path",
+                        "description": "value para la recomendación (por ejemplo: 'helado', 'galletas', etc.)",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta Exitosa",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                        }
+                    },
+
+                    "404": {
+                        "description": "No ofrecemos recomendaciones para ese postre"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+          "Recomendacion": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+    }
+}
