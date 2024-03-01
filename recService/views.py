@@ -49,3 +49,5 @@ def data(request):
     return HttpResponse(data, content_type='application/json')
         
 
+def test(request):
+    return HttpResponse('TEST', status=201)
