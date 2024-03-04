@@ -4,7 +4,9 @@ from openai import OpenAI
 import json
 import os
 
-client = OpenAI()
+#client = OpenAI()
+client = OpenAI(api_key='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')
+
 
 def default(request,type,value):
 
