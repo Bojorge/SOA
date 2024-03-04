@@ -3,10 +3,6 @@ from django.http import HttpResponse
 from openai import OpenAI
 import json
 import os
-from dotenv import load_dotenv
-
-
-
 
 
 def default(request,type,value):
@@ -36,10 +32,6 @@ def default(request,type,value):
     
     except:
         return HttpResponse('Parece que estas combinando mal el tipo y el plato', status=404)
-
-
-def externalSystem(request,type,value):
-    pass
 
 def data(request):
 
