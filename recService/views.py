@@ -3,9 +3,12 @@ from django.http import HttpResponse
 from openai import OpenAI
 import json
 import os
+from dotenv import load_dotenv
 
+
+API_KEY = os.getenv('API_KEY')
 #client = OpenAI()
-client = OpenAI(api_key='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')
+client = OpenAI(api_key=API_KEY)
 
 
 def default(request,type,value):
