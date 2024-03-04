@@ -16,6 +16,10 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -26,7 +30,7 @@ SECRET_KEY = 'django-insecure-alp*8_va*s9*)k5yny+sgt(wr6rer!x3&l0ohw$)g=&8qo5%#!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["soa-grupo4-api.azurewebsites.net"]
+ALLOWED_HOSTS = ["soa-grupo4-api.azurewebsites.net", "127.0.0.1"]
 
 
 # Application definition
