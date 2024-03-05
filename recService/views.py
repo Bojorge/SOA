@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from openai import OpenAI
 import json
 import os
+
 
 def default(request,type,value):
 
@@ -31,12 +33,6 @@ def default(request,type,value):
     except:
         return HttpResponse('Parece que estas combinando mal el tipo y el plato', status=404)
 
-def artificial(request,type,value):
-    pass
-
-def externalSystem(request,type,value):
-    pass
-
 def data(request):
 
     file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static/db/db.json')
@@ -49,5 +45,3 @@ def data(request):
     return HttpResponse(data, content_type='application/json')
         
 
-def test(request):
-    return HttpResponse('TEST', status=201)
