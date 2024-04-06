@@ -1,0 +1,17 @@
+{
+  "name": "frontend_cloud_function",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx functions-framework --target=BEGINNING"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@google-cloud/functions-framework": "^3.3.0"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

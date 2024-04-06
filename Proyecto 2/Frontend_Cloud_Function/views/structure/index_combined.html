@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú Interactivo</title>
+  <link rel="stylesheet" href="../style/index.css">
+</head>
+<body>
+  <h1>Consultar a un API de prueba</h1>
+  <input type="text" id="userDataField" readonly>
+
+
+  <h1>Menú del Restaurante</h1>
+  
+  <div id="menu">
+    <h2>Entradas</h2>
+    <ul id="entradas">
+    </ul>
+  
+    <h2>Platos Principales</h2>
+    <ul id="platos_principales">
+    </ul>
+  
+    <h2>Postres</h2>
+    <ul id="postres">
+    </ul>
+  </div>
+  
+  <h2>Recomendación del Chef</h2>
+  <p id="recomendacion"></p>
+  
+  <h2>Reservación</h2>
+  <form id="reservacion-form">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre">
+    <label for="fecha">Fecha:</label>
+    <input type="date" id="fecha" name="fecha">
+    <label for="hora">Hora:</label>
+    <input type="time" id="hora" name="hora">
+    <button type="submit">Reservar</button>
+  </form>
+  
+  <script src="../scripts/menu.js"></script>
+  <script src="../scripts/backend_service.js"></script>
+</body>
+</html>
+/* Estilos CSS para el menú interactivo */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1, h2 {
+    text-align: center;
+  }
+  
+  #menu {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 20px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    margin-bottom: 5px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="date"],
+  input[type="time"],
+  button {
+    padding: 8px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  // Arrays de platos para cada categoría
+var entradas = [
+  { nombre: "Pizza", precio: "$10" },
+  { nombre: "Ensalada César", precio: "$8" },
+  { nombre: "Bruschetta", precio: "$6" }
+];
+
+var platosPrincipales = [
+  { nombre: "Lasaña", precio: "$15" },
+  { nombre: "Pechuga de Pollo a la Parrilla", precio: "$12" },
+  { nombre: "Risotto de Champiñones", precio: "$14" }
+];
+
+var postres = [
+  { nombre: "Tiramisú", precio: "$7" },
+  { nombre: "Helado de Vainilla", precio: "$5" },
+  { nombre: "Pastel de Chocolate", precio: "$8" }
+];
+
+// Función para generar la lista de platos
+function generarListaPlatos(platos, contenedorId) {
+  var ul = document.getElementById(contenedorId);
+  platos.forEach(function(plato) {
+    var li = document.createElement("li");
+    li.textContent = plato.nombre + " - " + plato.precio;
+    ul.appendChild(li);
+  });
+}
+
+// Llamar a la función para generar las listas de platos
+generarListaPlatos(entradas, "entradas");
+generarListaPlatos(platosPrincipales, "platos_principales");
+generarListaPlatos(postres, "postres");
+
+function recomendarPlato() {
+  var platos = [
+    "Pizza",
+    "Lasaña",
+    "Pechuga de Pollo a la Parrilla",
+    "Tiramisú",
+    "Bruschetta",
+    "Risotto de Champiñones",
+    "Helado de Vainilla",
+    "Pastel de Chocolate"
+  ];
+  var randomIndex = Math.floor(Math.random() * platos.length);
+  return platos[randomIndex];
+}
+  
+// Mostrar la recomendación del chef
+document.getElementById("recomendacion").innerText = "Recomendación del Chef: " + recomendarPlato();
+  
+// Manejar la reserva
+document.getElementById("reservacion-form").addEventListener("submit", function(event) {
+  event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+    
+  var nombre = document.getElementById("nombre").value;
+  var fecha = document.getElementById("fecha").value;
+  var hora = document.getElementById("hora").value;
+    
+  // Aquí podrías enviar la información de la reserva a través de AJAX o cualquier otro método
+    
+  alert("¡Gracias por tu reserva, " + nombre + "! Hemos reservado una mesa para el " + fecha + " a las " + hora + ".");
+});const api_url = 'https://jsonplaceholder.typicode.com/users';
+
+function get(url) {
+    return fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Error al obtener los datos');
+        }
+        return response.json();
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        throw error;
+      });
+}
+
+function create(url, data) {
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    };
+
+    // Realiza la solicitud POST a la API
+    return fetch(url, requestOptions)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`La solicitud no se pudo completar correctamente. Código de estado: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Respuesta de la API:', data);
+            return data;
+        })
+        .catch(error => {
+            console.error('Error en la solicitud:', error);
+            throw error;
+        });
+}
+
+function update(url, data) {
+  const requestOptions = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data), // Convierte el objeto de datos a formato JSON
+  };
+  // Realiza la solicitud PUT a la API
+  fetch(url, requestOptions)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('La solicitud no se pudo completar correctamente');
+      }
+      return response.json(); // Parsea la respuesta JSON si la hay
+    })
+    .then(data => {
+      console.log('Respuesta de la API:', data);
+    })
+    .catch(error => {
+      console.error('Error en la solicitud:', error);
+    });
+}
+
+function eliminate(url, id) {
+    const requestOptions = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+  
+    // Realiza la solicitud DELETE a la API
+    return fetch(`${url}/${id}`, requestOptions)
+    .then((response) => {
+        if (!response.ok) {
+          throw new Error('La solicitud no se pudo completar correctamente');
+        }
+        console.log(`Eliminado con éxito para el ID: ${id}`);
+    })
+    .catch((error) => {
+        console.error(`Error al eliminar para el ID: ${id}`, error);
+        throw error;
+    });
+}
+
+get(api_url)
+  .then(data => {
+    console.log('Datos obtenidos:', data);
+    // Obtener el campo de texto
+    const userDataField = document.getElementById('userDataField');
+    // Convertir los datos a una cadena legible
+    const userDataString = JSON.stringify(data);
+    // Mostrar los datos en el campo de texto
+    userDataField.value = userDataString;
+  })
+  .catch(error => {
+    console.error('Error al obtener datos:', error);
+});
